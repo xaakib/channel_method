@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.channel_method">
    <application
-        android:label="channel_method"
+        android:label="channel method"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
