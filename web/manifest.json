@@ -1,6 +1,6 @@
 {
-    "name": "channel_method",
-    "short_name": "channel_method",
+    "name": "methodchannel",
+    "short_name": "methodchannel",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
