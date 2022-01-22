@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,80 +15,35 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  static const platform = MethodChannel('battery');
-  var _batteryLevel;
-  var deviceInfo;
-
-  Future<void> _getBatteryLevel(String invok) async {
-    var batteryLevel;
-    try {
-      var result = await platform.invokeMethod(invok);
-
-      if (result.runtimeType == int) {
-        batteryLevel = 'Battery level at $result % .';
-        setState(() {
-          _batteryLevel = batteryLevel;
-        });
-      } else if (result != null) {
-        print("result : $result");
-        setState(() {
-          deviceInfo = batteryLevel;
-        });
-      } else {
-        print("ERROR::::::::");
-      }
-    } on PlatformException catch (e) {
-      batteryLevel = "Failed to get battery level: '${e.message}'.";
-    }
-  }
-
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Channel Method"),
       ),
-      body: Center(
+      body: Container(
+        width: double.infinity,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              _batteryLevel.toString(),
-              style: TextStyle(fontSize: 30),
-            ),
-            ElevatedButton(
-                onPressed: () async {
-                  await _getBatteryLevel('getBatteryLevel');
-                },
-                child: Text("Battery Percnt")),
-            Text(
-              deviceInfo.toString(),
-              style: TextStyle(fontSize: 30),
-            ),
-            ElevatedButton(
-                onPressed: () async {
-                  await _getBatteryLevel('other');
-                },
-                child: Text("GetInfo"))
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text("|Hi"),
+            ElevatedButton(onPressed: () {}, child: Text("GetData"))
           ],
         ),
       ),
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

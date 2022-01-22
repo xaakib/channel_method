@@ -1,4 +1,4 @@
-package com.example.channel_method
+package com.example.methodchannel
 
 import android.widget.Toast
 import androidx.annotation.NonNull

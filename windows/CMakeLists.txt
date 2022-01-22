@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(channel_method LANGUAGES CXX)
+project(methodchannel LANGUAGES CXX)
 
-set(BINARY_NAME "channel_method")
+set(BINARY_NAME "methodchannel")
 
 cmake_policy(SET CMP0063 NEW)
 
