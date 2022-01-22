@@ -55,7 +55,7 @@ class MainActivity: FlutterActivity() {
 
         return batteryLevel
     }
-    private fun getDeviceInfo(): HashMap<String, String> {
+    private fun getDeviceInfo(): HashMap<String, String> {   
         val deviceInfo = HashMap<String, String>()
         deviceInfo["version"] = System.getProperty("os.version").toString() // OS version
         deviceInfo["device"] = android.os.Build.DEVICE           // Device
