@@ -32,20 +32,30 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   static const platform = MethodChannel('battery');
-  String _batteryLevel = 'Unknown battery level.';
+  var _batteryLevel;
+  var deviceInfo;
 
-  Future<void> _getBatteryLevel() async {
-    String batteryLevel;
+  Future<void> _getBatteryLevel(String invok) async {
+    var batteryLevel;
     try {
-      final int result = await platform.invokeMethod('getBatteryLevel');
-      batteryLevel = 'Battery level at $result % .';
+      var result = await platform.invokeMethod(invok);
+
+      if (result.runtimeType == int) {
+        batteryLevel = 'Battery level at $result % .';
+        setState(() {
+          _batteryLevel = batteryLevel;
+        });
+      } else if (result != null) {
+        print("result : $result");
+        setState(() {
+          deviceInfo = batteryLevel;
+        });
+      } else {
+        print("ERROR::::::::");
+      }
     } on PlatformException catch (e) {
       batteryLevel = "Failed to get battery level: '${e.message}'.";
     }
-
-    setState(() {
-      _batteryLevel = batteryLevel;
-    });
   }
 
   @override
@@ -59,14 +69,23 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              _batteryLevel,
+              _batteryLevel.toString(),
               style: TextStyle(fontSize: 30),
             ),
             ElevatedButton(
                 onPressed: () async {
-                  await _getBatteryLevel();
+                  await _getBatteryLevel('getBatteryLevel');
                 },
-                child: Text("Channel Method"))
+                child: Text("Battery Percnt")),
+            Text(
+              deviceInfo.toString(),
+              style: TextStyle(fontSize: 30),
+            ),
+            ElevatedButton(
+                onPressed: () async {
+                  await _getBatteryLevel('other');
+                },
+                child: Text("GetInfo"))
           ],
         ),
       ),

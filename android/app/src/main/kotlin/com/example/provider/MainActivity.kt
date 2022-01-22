@@ -29,8 +29,15 @@ class MainActivity: FlutterActivity() {
                 } else {
                     result.error("UNAVAILABLE", "Battery level not available.", null)
                 }
-            } else {
-                result.notImplemented()
+            }   else 
+               {
+                    val deviceInfo: HashMap<String, String> = getDeviceInfo()
+                    if (deviceInfo.isNotEmpty()) {
+                        result.success(deviceInfo)
+                    } else {
+                        result.error("UNAVAILABLE", "Device info not available.", null)
+                    }
+
             }
         }
     }
@@ -45,6 +52,14 @@ class MainActivity: FlutterActivity() {
         }
 
         return batteryLevel
+    }
+    private fun getDeviceInfo(): HashMap<String, String> {
+        val deviceInfo = HashMap<String, String>()
+        deviceInfo["version"] = System.getProperty("os.version").toString() // OS version
+        deviceInfo["device"] = android.os.Build.DEVICE           // Device
+        deviceInfo["model"] = android.os.Build.MODEL            // Model
+        deviceInfo["product"] = android.os.Build.PRODUCT          // Product
+        return deviceInfo
     }
 
 }
