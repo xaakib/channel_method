@@ -29,8 +29,11 @@ class MainActivity: FlutterActivity() {
                 } else {
                     result.error("UNAVAILABLE", "Battery level not available.", null)
                 }
-            }   else 
+            }   else if(call.method =="other")
                {
+
+
+                
                     val deviceInfo: HashMap<String, String> = getDeviceInfo()
                     if (deviceInfo.isNotEmpty()) {
                         result.success(deviceInfo)
@@ -38,6 +41,8 @@ class MainActivity: FlutterActivity() {
                         result.error("UNAVAILABLE", "Device info not available.", null)
                     }
 
+            }else{
+                print("Error");
             }
         }
     }
