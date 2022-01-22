@@ -58,18 +58,19 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Text(
+              _batteryLevel,
+              style: TextStyle(fontSize: 30),
             ),
-            Text(_batteryLevel, style: TextStyle(fontSize: 30)),
+            ElevatedButton(
+                onPressed: () async {
+                  await _getBatteryLevel();
+                },
+                child: Text("Channel Method"))
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _getBatteryLevel,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
