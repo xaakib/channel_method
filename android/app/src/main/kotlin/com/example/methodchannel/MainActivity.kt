@@ -31,9 +31,6 @@ class MainActivity: FlutterActivity() {
                 }
             }   else if(call.method =="other")
                {
-
-
-                
                     val deviceInfo: HashMap<String, String> = getDeviceInfo()
                     if (deviceInfo.isNotEmpty()) {
                         result.success(deviceInfo)
